@@ -1,71 +1,113 @@
-class Pelicula:
-    def __init__(self, nombre, duracion, fecha_estreno):
-        self.nombre = nombre
-        self.duracion = duracion
-        self.fecha_estreno = fecha_estreno
+class Pelicula:  # Clase principal
+    def __init__(self, titulo, genero, duracion, director=None, trama=None):
+        self.titulo = titulo  # Atributo
+        self.genero = genero  # Atributo
+        self.duracion = duracion  # Atributo
+        self.director = director  # Atributo para el director
+        self.trama = Trama(trama) if trama else None  # Composición
 
-    def ver(self):
-        print("Viendo la película...")
+    def ver_pelicula(self):
+        print("Viendo:", self.titulo,"-","Veo, veo.")
 
-    def escuchar(self):
-        print("Escuchando la banda sonora...")
+    def escuchar_pelicula(self):
+        print("Escuchando:", self.titulo,"-","Escucho, escucho.")
 
-class Director:
-    def __init__(self, nombre, nacionalidad):
-        self.nombre = nombre
-        self.nacionalidad = nacionalidad
-        self.peliculas_dirigidas = []
+    def listar_pelicula(self):
+        print("Película:", self.titulo)
+        print("Género:", self.genero)
+        print("Duración:", self.duracion, "minutos")
+        if self.director:
+            print("Director:", self.director.nombre)
+        if self.trama:
+            self.trama.mostrar_trama()
+        print("-------------------------")
+
+class Trama:  # Clase Trama (Composición)
+    def __init__(self, descripcion):
+        self.descripcion = descripcion  # Atributo
+
+    def mostrar_trama(self):
+        print("Trama:", self.descripcion)
+
+class Director:  # Clase Director (Agregación)
+    def __init__(self, nombre, edad, nacionalidad):
+        self.nombre = nombre  # Atributo
+        self.edad = edad  # Atributo
+        self.nacionalidad = nacionalidad  # Atributo
 
     def dirigir_pelicula(self, pelicula):
-        self.peliculas_dirigidas.append(pelicula)
-        print(f"{self.nombre} dirigió la película {pelicula.nombre}")
+        pelicula.director = self
+        print(self.nombre, "dirigió la película", pelicula.titulo)
 
-    def mostrar_peliculas_dirigidas(self):
-        print(f"{self.nombre} ha dirigido las siguientes películas:")
-        for pelicula in self.peliculas_dirigidas:
-            print(pelicula.nombre)
+    def listar_director(self):
+        print("Director:", self.nombre)
+        print("Edad:", self.edad)
+        print("Nacionalidad:", self.nacionalidad)
 
-class Protagonista:
-    def __init__(self, nombre, papel):
-        self.nombre = nombre
-        self.papel = papel
+    def filmografia(self, peliculas):
+        print("Películas dirigidas por", self.nombre, ":")
+        for pelicula in peliculas:
+            print("-", pelicula.titulo)
+        print("-------------------------")
 
-class Trama:
-    def __init__(self, descripcion):
-        self.descripcion = descripcion
+class Premier:  # Clase Premier (Asociación)
+    def __init__(self, pelicula, director, fecha_premier):
+        self.pelicula = pelicula  # Atributo
+        self.director = director  # Atributo
+        self.fecha_premier = fecha_premier  # Atributo
 
-# Creación de objetos de clase Pelicula
-pelicula1 = Pelicula("One Day", "Una hora cuarenta", 2010)
-pelicula2 = Pelicula("Spiderman", "Dos horas", "2023")
+    def mostrar_premier(self):
+        print("PREMIER")
+        print("Película:", self.pelicula.titulo)
+        print("Fecha de Premier:", self.fecha_premier)
+        print("-------------------------")
+
+    def ejecutar_premier(self):
+        self.director.dirigir_pelicula(self.pelicula)
+        print("-------------------------")
 
 # Creación de objetos de clase Director
-director1 = Director("Christopher Nolan", "Británico")
-director2 = Director("Guillermo del Toro", "Mexicano")
+director1 = Director("Todd Phillips", 52, "Estadounidense")
+director2 = Director("Lone Scherfig", 63, "Danesa")
+director3 = Director("Haruo Sotozaki", 49, "Japonés")
 
-# Creación de objetos de clase Protagonista
-protagonista1 = Protagonista("Anne Hathaway", "Emma")
-protagonista2 = Protagonista("Tom Holland", "Peter Parker")
+# Creación de objetos de clase Pelicula
+pelicula1 = Pelicula("¿Qué pasó ayer?", "Comedia", 102, trama="Un grupo de amigos despierta sin recordar nada de la noche anterior.")
+pelicula2 = Pelicula("One Day", "Romance", 152, trama="Dos personas se encuentran el mismo día durante 20 años.")
+pelicula3 = Pelicula("Demon Slayer", "Anime drama", 164, trama="Un joven lucha contra demonios para salvar a su hermana.")
 
-# Creación de objetos de clase Trama
-trama1 = Trama("Una historia de amor y amistad que se desarrolla a lo largo de varios años.")
-trama2 = Trama("Un joven adquiere habilidades arácnidas y lucha contra el crimen en la ciudad.")
+# Creación de objetos de clase Premier
+premier1 = Premier(pelicula1, director1, "2023-01-01")
+premier2 = Premier(pelicula2, director2, "2023-02-01")
+premier3 = Premier(pelicula3, director3, "2023-03-01")
 
-# Asociación entre objetos
-pelicula1.director = director1
-pelicula1.protagonista = protagonista1
-pelicula1.trama = trama1
+# Ejecutar premiers
+premier1.ejecutar_premier()
+premier2.ejecutar_premier()
+premier3.ejecutar_premier()
 
-pelicula2.director = director2
-pelicula2.protagonista = protagonista2
-pelicula2.trama = trama2
+# Mostrar premiers
+premier1.mostrar_premier()
+premier2.mostrar_premier()
+premier3.mostrar_premier()
 
-# Imprimir información de la película
-print(f"**Película:** {pelicula1.nombre}")
-print(f"**Director:** {pelicula1.director.nombre}")
-print(f"**Protagonista:** {pelicula1.protagonista.nombre}")
-print(f"**Trama:** {pelicula1.trama.descripcion}\n")
+# Pruebas de atributos y métodos de los objetos Pelicula y Director
+pelicula1.ver_pelicula()
+pelicula1.escuchar_pelicula()
+pelicula1.listar_pelicula()
 
-print(f"**Película:** {pelicula2.nombre}")
-print(f"**Director:** {pelicula2.director.nombre}")
-print(f"**Protagonista:** {pelicula2.protagonista.nombre}")
-print(f"**Trama:** {pelicula2.trama.descripcion}")
+pelicula2.ver_pelicula()
+pelicula2.escuchar_pelicula()
+pelicula2.listar_pelicula()
+
+pelicula3.ver_pelicula()
+pelicula3.escuchar_pelicula()
+pelicula3.listar_pelicula()
+
+# Pruebas de métodos de los objetos Director
+director1.listar_director()
+director1.filmografia([pelicula1])
+director2.listar_director()
+director2.filmografia([pelicula2])
+director3.listar_director()
+director3.filmografia([pelicula3])
