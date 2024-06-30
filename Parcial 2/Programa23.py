@@ -1,27 +1,36 @@
-# CLASE
-class Pelicula:
-    def __init__(self, nombre, duracion, fecha_estreno):
-        self.nombre = nombre  # Atributo
-        self.duracion = duracion  # Atributo
-        self.fecha_estreno = fecha_estreno  # Atributo
+class Pelicula: #Clase principal
+    def __init__(self, titulo, genero, duracion):
+        self.titulo = titulo #Atrubuto
+        self.genero = genero #Atrubuto
+        self.duracion = duracion #Atrubuto
     
-    def ver(self):
-        print("Miro, miro")
-        
-    def escuchar(self):
-        print("Cha, cha, chachacha")
-  
-# OBJETOS (INSTANCIAS DE LA CLASE PELICULA)
-pelicula1 = Pelicula("One Day", "Una hora cuarenta", 2010)
-pelicula2 = Pelicula("Spiderman", "Dos horas", 2023)
+    def ver_pelicula(self):
+        print("Viendo:", self.titulo, "Veo, veo.")
+    
+    def escuchar_pelicula(self):
+        print("Escuchando:", self.titulo, "Escucho, escucho.")
+    
+    def listar_pelicula(self):
+        print("Película:", self.titulo)
+        print("Género:", self.genero)
+        print("Duración:", self.duracion, "minutos")
+        print("-------------------------")
 
-# USAR ATRIBUTOS DEL OBJETO
-print(pelicula1.nombre)
-print(pelicula1.duracion)
-print(pelicula1.fecha_estreno)
-print(pelicula2.nombre, pelicula2.duracion, pelicula2.fecha_estreno)
+# Creación de objetos de clase Pelicula
+pelicula_1 = Pelicula("¿Que paso ayer?", "Comedia", 102)
+pelicula_2 = Pelicula("One Day", "Romance", 152)
+pelicula_3 = Pelicula("Demon Slayer", "Anime drama", 164)
 
-# USAR MÉTODOS DE LA CLASE PARA MIS OBJETOS
-pelicula2.ver()
-pelicula2.escuchar()
+# Pruebas de atributos y métodos de los objetos Pelicula
+pelicula_1.ver_pelicula()
+pelicula_1.escuchar_pelicula()
+pelicula_1.listar_pelicula()
+
+pelicula_2.ver_pelicula()
+pelicula_2.escuchar_pelicula()
+pelicula_2.listar_pelicula()
+
+pelicula_3.ver_pelicula()
+pelicula_3.escuchar_pelicula()
+pelicula_3.listar_pelicula()
 
