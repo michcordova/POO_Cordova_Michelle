@@ -7,3 +7,4 @@ print("Signo:", signo)
 print("Edad proxima:", edad_proxima)
 
 
+
