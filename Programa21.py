@@ -5,3 +5,5 @@ print("Edad:", edad)
 print("Ocupacion:", ocupacion)
 print("Signo:", signo)
 print("Edad proxima:", edad_proxima)
+
+
