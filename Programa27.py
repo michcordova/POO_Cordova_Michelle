@@ -150,3 +150,4 @@ peliExtendida1.listar_pelicula()
 print("PELICULA CON VERSION EXTENDIDA:")
 peliExtendida2.ver_pelicula()
 peliExtendida2.listar_pelicula()
+
