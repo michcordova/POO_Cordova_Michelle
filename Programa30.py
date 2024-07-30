@@ -1,22 +1,22 @@
 import mysql.connector
 
 connection = {
-    "host": "localhost",
-    "user": "root",
-    "password": "",
-    "database": "control1",
+    "host": 'localhost',
+    "user": 'root',
+    "password": '',
+    "database": 'control1',
 }
 
 try:
     connection = mysql.connector.connect(**connection)
-    print("Conexión exitosa a la base de datos MySQL")
+    print("Conexión exitosa")
 except mysql.connector.Error as err:
     print(f"Error al conectar a la base de datos: {err}")
     exit()
 
 cursor = connection.cursor()
 
-# ELECT
+#SELECT
 cursor.execute("SELECT * FROM alumnos")
 alumnos = cursor.fetchall()
 print("Datos de la tabla 'alumnos':")
